@@ -65,6 +65,65 @@ make lint
 make test
 ```
 
+## Go rewrite (in progress)
+
+The repository now contains a Go runtime under `cmd/nyanbot` and `internal/*`.
+
+Required env vars:
+
+- `TOKEN` - Telegram bot token
+
+Optional env vars:
+
+- `SQLITE_DB_PATH` (default: `bot.db`)
+- `SENTRY_DSN`
+- `DEBUG`
+- `HTTP_TIMEOUT` (default: `30s`)
+- `SHUTDOWN_TIMEOUT` (default: `10s`)
+- `CHAT_ID` (for scheduled chat/aoc jobs)
+- `AOC_SESSION` (for AOC private leaderboard refresh)
+- `OPENAI_API_KEY` (chat mode AI fallback)
+- `GEMINI_API_KEY` (chat mode AI fallback)
+
+Run Go bot locally:
+
+```sh
+make go_run
+```
+
+Run Go checks:
+
+```sh
+make go_test
+make go_cover
+make go_lint
+```
+
+Run SQLite migrations for Go runtime:
+
+```sh
+make migrate-status
+make migrate-up
+```
+
+One-time SQLite data copy for cutover dry-run:
+
+```sh
+SOURCE_SQLITE_DB_PATH=./bot.db TARGET_SQLITE_DB_PATH=./go-bot.db make migrate-data
+```
+
+Build Go runtime container image:
+
+```sh
+docker build -f Dockerfile.nyan-go -t vldc-nyan-go:local .
+```
+
+Operational docs:
+
+- `docs/staging-validation.md`
+- `docs/cutover-checklist.md`
+- `docs/rollback.md`
+
 ## Build local image
 
 ```
