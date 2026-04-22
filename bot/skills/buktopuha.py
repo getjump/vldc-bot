@@ -274,7 +274,7 @@ def generate_question(prompt: str, word: str) -> str:
         "gpt-5-nano",
     ]
     google_models = [
-        "gemma-3-27b-it",
+        "gemma-4-31b-it",
         "gemini-2.5-flash",
         "gemini-3-flash-preview",
     ]
