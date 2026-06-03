@@ -1,24 +1,11 @@
 services:
   bot:
     image: ghcr.io/vldc-hq/vldc-bot/bot:latest
-    depends_on:
-      - mongo
     env_file:
       - ./.env
 
     volumes:
       - ./:/opt/gcloud
-    logging:
-      options:
-        max-size: "1M"
-        max-file: "10"
-
-  mongo:
-    image: mongo:4.2.15
-    volumes:
-      - /opt/mongo/data/db:/data/db
-    env_file:
-      - ./.env
     logging:
       options:
         max-size: "1M"
