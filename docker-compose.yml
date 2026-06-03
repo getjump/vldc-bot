@@ -5,9 +5,7 @@ services:
       - mongo
     env_file:
       - ./.env
-    environment:
-      - PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
-      - PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION_VERSION=2
+
     volumes:
       - ./:/opt/gcloud
     logging:

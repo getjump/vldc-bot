@@ -10,10 +10,9 @@ WORKDIR /app
 
 RUN pip install uv==0.9.28
 
-COPY pyproject.toml /app/
+COPY pyproject.toml uv.lock /app/
 RUN python -m venv /opt/venv
-RUN uv sync --active --dev --no-install-project \
-    && python -c "import os, shutil, site; p=os.path.join(site.getsitepackages()[0],'google','_upb'); shutil.rmtree(p, ignore_errors=True)"
+RUN uv sync --active --dev --no-install-project
 
 COPY . /app
 

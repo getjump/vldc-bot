@@ -375,10 +375,11 @@ def generate_question(prompt: str, word: str) -> str:
         else []
     )
     gemini_models = [
-        "gemini-1.5-pro",
         "gemini-2.0-flash",
         "gemini-2.5-pro-preview-03-25",
         "gemini-3-flash-preview",
+        "gemini-3.1-flash-lite",
+        "gemini-3.5-flash",
     ]
     models = gpt_models + (gemini_models if genai_client is not None else [])
     if not models:

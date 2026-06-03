@@ -8,11 +8,7 @@ https://github.com/vldc-hq/vldc-bot
 # pylint: disable=wrong-import-position
 
 import logging
-import os
 from typing import Any, cast
-
-# Work around protobuf C-extension incompatibility with Python 3.14
-os.environ["PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION"] = "python"
 
 import sentry_sdk  # noqa: E402
 from telegram.ext import ApplicationBuilder, ContextTypes  # noqa: E402

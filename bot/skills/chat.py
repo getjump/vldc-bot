@@ -104,7 +104,7 @@ class Nyan:
             try:
 
                 response = client.models.generate_content(
-                    model="gemini-3-flash-preview",
+                    model="gemini-3.5-flash",
                     contents=messages,
                     config=types.GenerateContentConfig(system_instruction=prompt),
                 )
@@ -258,7 +258,7 @@ async def muse_visit(context: ContextTypes.DEFAULT_TYPE):
 def summarize(log: str) -> str:
     try:
         response = client.models.generate_content(
-            model="gemini-3-flash-preview",
+            model="gemini-3.1-flash-lite",
             contents=f"Дай выжимку из следующего текста на русском языке в одном предложении, без форматирования.\n {log}",
             config=types.GenerateContentConfig(
                 system_instruction="Ты языковая модель, специализирующаяся на суммаризации текста. Ты всегда выдаёшь чёткую выжимку в одном предложении на русском языке без форматирования."
