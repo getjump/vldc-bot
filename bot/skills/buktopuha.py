@@ -274,9 +274,9 @@ def generate_question(prompt: str, word: str) -> str:
         "gpt-5-nano",
     ]
     google_models = [
-        "gemma-4-31b-it",
-        "gemini-2.5-flash",
         "gemini-3-flash-preview",
+        "gemini-3.1-flash-lite",
+        "gemini-3.5-flash",
     ]
     if random.random() < 0.5:
         model = random.choice(openai_models)
