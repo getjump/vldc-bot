@@ -1,4 +1,5 @@
 import logging
+import random
 
 from telegram import Update, User
 from telegram.ext import ContextTypes
@@ -8,6 +9,55 @@ from mode import cleanup_queue_update
 from handlers import ChatCommandHandler
 
 logger = logging.getLogger(__name__)
+
+# Прилагательные в родительном падеже (мужской/средний род)
+ADJECTIVES = [
+    "систематического",
+    "неконтролируемого",
+    "демонстративного",
+    "подозрительного",
+    "хронического",
+    "избыточного",
+    "мистического",
+    "несанкционированного",
+    "громкого",
+    "неприличного",
+    "агрессивного",
+    "таинственного",
+    "виртуального",
+    "философского",
+    "пассивного",
+    "драматического",
+    "космического",
+]
+
+# Существительные в родительном падеже (мужской/средний род)
+NOUNS = [
+    "запаха",
+    "поведения",
+    "молчания",
+    "дыхания",
+    "взгляда",
+    "кашля",
+    "аппетита",
+    "сна",
+    "смеха",
+    "везения",
+    "нытья",
+    "сидения",
+    "присутствия",
+    "интеллекта",
+    "юмора",
+    "обаяния",
+    "игнорирования",
+]
+
+
+def generate_dismissal_reason() -> str:
+    """Генерирует случайную и смешную причину увольнения."""
+    adj = random.choice(ADJECTIVES)
+    noun = random.choice(NOUNS)
+    return f"по причине {adj} {noun}"
 
 
 def add_fire(app: App, handlers_group: int):
@@ -25,10 +75,11 @@ async def fire(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if user and chat_id:
         reason = " ".join(context.args or []).strip()
-        text = f"Пользователь {user.name} уволен"
-        if reason:
-            text = f"{text} {reason}"
-        result = await context.bot.send_message(chat_id, text)
+        if not reason:
+            reason = generate_dismissal_reason()
+        result = await context.bot.send_message(
+            chat_id, f"Пользователь {user.name} уволен {reason}"
+        )
         cleanup_queue_update(
             get_job_queue(context),
             update.message,
